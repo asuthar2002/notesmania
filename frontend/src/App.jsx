@@ -16,6 +16,7 @@ import LoginPage from './pages/auth/loginPage/LoginPage'
 import SignUpPage from './pages/auth/loginPage/signupPage/SignUpPage'
 import HomePage from './pages/HomePage'
 import Courses from './pages/coursesPage.jsx/CoursesPage'
+import UserPage from './pages/userPage/UserPage'
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
         <Route path="/courses" element={<Courses />} />
         <Route path="/stats" element={<ProudStatsSection />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/user" element={<UserPage/>} />
         <Route path="/sign-up" element={<SignUpPage />} />
       </Routes>
     </Router>
