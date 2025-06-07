@@ -15,7 +15,7 @@ const HeroPage = () => {
 />
 
     <div
-      className="absolute inset-0 flex flex-col justify-center max-w-7xl mx-auto px-6 sm:px-10 md:px-16 lg:px-24 xl:px-32"
+      className="absolute inset-0 flex flex-col justify-center max-w-7xl mx-auto px-6 sm:px-10 md:px-16 lg:px-24 xl:px-10"
       style={{ maxWidth: 1920 }}
     >
 <div className="flex flex-col items-center justify-center min-h-screen px-4 md:flex md:flex-col  md:items-start md:justify-center ">

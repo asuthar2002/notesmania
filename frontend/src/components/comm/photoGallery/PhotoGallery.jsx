@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import SectionHeader from "../sectionHeader/SectionHeader";
 
 const images = [
   // Left column
@@ -27,68 +28,72 @@ const PhotoGallery = () => {
 
   return (
     <>
-      {/* Gallery Layout */}
-      <section className="overflow-hidden text-gray-700">
-        <div className="container px-5 py-2 mx-auto lg:pt-24 ">
-          <div className="flex flex-wrap -m-1 md:-m-2">
-            {/* Left Column */}
-            <div className="flex flex-wrap w-full md:w-1/2">
-              <div className="w-1/2 p-1 md:p-2">
-                <img
-                  src={images[0]}
-                  alt="Gallery 1"
-                  onClick={() => openModal(0)}
-                  className="block object-cover object-center w-full h-full rounded-lg cursor-pointer hover:scale-103 transition-transform"
-                />
-              </div>
-              <div className="w-1/2 p-1 md:p-2">
-                <img
-                  src={images[1]}
-                  alt="Gallery 2"
-                  onClick={() => openModal(1)}
-                  className="block object-cover object-center w-full h-full rounded-lg cursor-pointer hover:scale-103 transition-transform"
-                />
-              </div>
-              <div className="w-full p-1 md:p-2">
-                <img
-                  src={images[2]}
-                  alt="Gallery 3"
-                  onClick={() => openModal(2)}
-                  className="block object-cover object-center w-full h-full rounded-lg cursor-pointer hover:scale-103 transition-transform"
-                />
-              </div>
-            </div>
 
-            {/* Right Column */}
-            <div className="flex flex-wrap w-full md:w-1/2">
-              <div className="w-full p-1 md:p-2">
-                <img
-                  src={images[3]}
-                  alt="Gallery 4"
-                  onClick={() => openModal(3)}
-                  className="block object-cover object-center w-full h-full rounded-lg cursor-pointer hover:scale-103 transition-transform"
-                />
-              </div>
-              <div className="w-1/2 p-1 md:p-2">
-                <img
-                  src={images[4]}
-                  alt="Gallery 5"
-                  onClick={() => openModal(4)}
-                  className="block object-cover object-center w-full h-full rounded-lg cursor-pointer hover:scale-103 transition-transform"
-                />
-              </div>
-              <div className="w-1/2 p-1 md:p-2">
-                <img
-                  src={images[5]}
-                  alt="Gallery 6"
-                  onClick={() => openModal(5)}
-                  className="block object-cover object-center w-full h-full rounded-lg cursor-pointer hover:scale-103 transition-transform"
-                />
-              </div>
-            </div>
-          </div>
+    <SectionHeader title='Our Best' highlightText='Moments' subtitle='Check out the Gallery' />
+
+      {/* Gallery Layout */}
+      <section className="text-gray-700">
+  <div className="container px-5 py-4 mx-auto">
+    <div className="flex flex-wrap -m-1 md:-m-2">
+      {/* Left Column */}
+      <div className="flex flex-wrap w-full md:w-1/2">
+        <div className="w-1/2 p-1 md:p-2">
+          <img
+            src={images[0]}
+            alt="Gallery 1"
+            onClick={() => openModal(0)}
+            className="block object-cover object-center w-full h-40 rounded-lg cursor-pointer hover:scale-[1.01] transition-transform"
+          />
         </div>
-      </section>
+        <div className="w-1/2 p-1 md:p-2">
+          <img
+            src={images[1]}
+            alt="Gallery 2"
+            onClick={() => openModal(1)}
+            className="block object-cover object-center w-full h-40 rounded-lg cursor-pointer hover:scale-[1.01] transition-transform"
+          />
+        </div>
+        <div className="w-full p-1 md:p-2">
+          <img
+            src={images[2]}
+            alt="Gallery 3"
+            onClick={() => openModal(2)}
+            className="block object-cover object-center w-full h-48 rounded-lg cursor-pointer hover:scale-[1.01] transition-transform"
+          />
+        </div>
+      </div>
+
+      {/* Right Column */}
+      <div className="flex flex-wrap w-full md:w-1/2">
+        <div className="w-full p-1 md:p-2">
+          <img
+            src={images[3]}
+            alt="Gallery 4"
+            onClick={() => openModal(3)}
+            className="block object-cover object-center w-full h-48 rounded-lg cursor-pointer hover:scale-[1.01] transition-transform"
+          />
+        </div>
+        <div className="w-1/2 p-1 md:p-2">
+          <img
+            src={images[4]}
+            alt="Gallery 5"
+            onClick={() => openModal(4)}
+            className="block object-cover object-center w-full h-40 rounded-lg cursor-pointer hover:scale-[1.01] transition-transform"
+          />
+        </div>
+        <div className="w-1/2 p-1 md:p-2">
+          <img
+            src={images[5]}
+            alt="Gallery 6"
+            onClick={() => openModal(5)}
+            className="block object-cover object-center w-full h-40 rounded-lg cursor-pointer hover:scale-[1.01] transition-transform"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
       {/* Modal */}
       {isOpen && (

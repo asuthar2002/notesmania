@@ -19,10 +19,10 @@ const HomePage = () => {
 <CategorySlider/>
 <CategoriesPage />
 <Courses/>
-<PromoCard/>
 <LiveCoursesSlider/>
 {/* <MissionFeatures/> */}
 <PhotoGallery/>
+<PromoCard/>
 </div>
 </>
   )

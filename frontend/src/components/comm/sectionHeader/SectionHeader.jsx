@@ -14,7 +14,6 @@ const SectionHeader = ({
         <span className={`${highlightColor} font-extrabold`}>
           {highlightText}
         </span>{" "}
-        Courses
       </h1>
       <p className="mt-1 text-gray-600 text-sm">
         {subtitle} <i className={iconClass} />
