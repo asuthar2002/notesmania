@@ -3,10 +3,12 @@ import UserHeader from '../../components/comm/userProfile/UserHeader';
 import UserSidebar from '../../components/comm/userProfile/UserSidebar';
 import UserDashboard from './userSabPage/UserDashboard';
 import EditProfileForm from '../../components/comm/userProfile/editProfile/EditProfileForm';
+import ComingSoonPage from '../comingSoonPage/ComingSoonPage';
+import SettingsForm from '../../components/comm/userProfile/editProfile/SettingsForm';
 
 const UserPage = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
-  const [activeComponent, setActiveComponent] = useState('dashboard');
+  const [activeComponent, setActiveComponent] = useState('Dashboard');
 
   useEffect(() => {
     console.log(activeComponent);
@@ -16,12 +18,23 @@ const UserPage = () => {
     switch (activeComponent) {
       case 'Dashboard':
         return <UserDashboard />;
-        default:
-        case 'Quiz':
-          return <h1>ddd</h1>;
-        case 'Edit Profile':
+      case 'My Subscriptions':
+        return <ComingSoonPage />;
+      case 'My Courses':
+        return <ComingSoonPage />;
+      case 'Course Resume':
+        return <ComingSoonPage />;
+      case 'Quiz':
+        return <ComingSoonPage />;
+      case 'Wishlist':
+        return <ComingSoonPage />;
+      case 'Quiz':
+        return <ComingSoonPage />;
+      case 'Settings':
+          return <SettingsForm/>;
+      case 'Edit Profile':
           return <EditProfileForm/>;
-        return <UserDashboard />;
+      return <UserDashboard />;
     }
   };
 
@@ -37,30 +50,31 @@ const UserPage = () => {
         />
       )}
 
-      <div className="flex flex-col md:p-10">
-        <div className="flex flex-1 overflow-hidden">
-          {/* Sidebar */}
-          <div
-            className={`
-              fixed top-0 left-0 h-full bg-white z-40 pr-4
-              transform transition-transform duration-500 ease-in-out
-              ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
-              md:translate-x-0 md:relative md:block
-            `}
-          >
-            <UserSidebar
-              setActiveComponent={setActiveComponent}
-              closeSidebar={() => setSidebarOpen(false)}
-              activeLabel={activeComponent}
-            />
-          </div>
+<div className="flex min-h-screen md:p-10">
+  {/* Sidebar */}
+  <div
+    className={`
+      fixed top-0 left-0 h-full bg-white z-40 pr-4
+      transform transition-transform duration-500 ease-in-out
+      ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+      md:translate-x-0 md:relative md:block
+      md:sticky md:top-0 md:h-screen
+    `}
+  >
+    <UserSidebar
+      className="h-full"
+      setActiveComponent={setActiveComponent}
+      closeSidebar={() => setSidebarOpen(false)}
+      activeLabel={activeComponent}
+    />
+  </div>
 
-          {/* Main Content */}
-          <div className="flex-1 overflow-auto">
-            {renderComponent()}
-          </div>
-        </div>
-      </div>
+  {/* Main Content */}
+  <div className="flex-1 overflow-auto  md:mt-0 ml-0 ">
+    {renderComponent()}
+  </div>
+</div>
+
     </>
   );
 };

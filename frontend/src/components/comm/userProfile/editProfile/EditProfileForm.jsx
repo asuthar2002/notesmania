@@ -179,7 +179,7 @@ const EditProfileForm = () => {
           </button>
         </section>
       </form>
-      <div className="flex w-full gap-2 mt-5">
+      <div className="flex flex-col md:flex-row w-full gap-2 mt-5">
         <SocialMediaProfileForm/>
         <UpdatePasswordForm/>
       </div>
