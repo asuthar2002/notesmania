@@ -1,32 +1,11 @@
-import React from "react";
-import GraphComponent from "../../../components/comm/userProfile/comm/GraphComponent";
-import PaginatedBox from "../../../components/comm/paginatedBox/PaginatedBox";
-import CourseCard from "../../../components/comm/courseCard/CourseCard";
+import React from 'react'
+import Courses from '../../../pages/coursesPage.jsx/CoursesPage'
+import PaginatedBox from '../paginatedBox/PaginatedBox';
+import CourseCard from '../courseCard/CourseCard';
 
-const dashboardData = [
-  {
-    icon: "fas fa-desktop",
-    bgColor: "#FFE9D3",
-    iconColor: "#FF7F1A",
-    count: 9,
-    label: "Total Courses",
-  },
-  {
-    icon: "fas fa-clipboard-check",
-    bgColor: "#E5DFF8",
-    iconColor: "#6B3BD2",
-    count: 52,
-    label: "Complete Lessons",
-  },
-  {
-    icon: "fas fa-medal",
-    bgColor: "#E6F6F2",
-    iconColor: "#00A67E",
-    count: 8,
-    label: "Achieved Certificates",
-  },
-];
+const MyUploads = () => {
 
+    
   const cardData = [
     {
       image: 'https://storage.googleapis.com/a1aa/image/2a0ed76e-8705-47ba-a362-79a1ab184af0.jpg',
@@ -95,44 +74,21 @@ const dashboardData = [
     },
   ];
 
-
-const UserDashboard = () => {
   return (
-    <>
-      <div className="">
-        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row gap-6 ">
-          {dashboardData.map((item, index) => (
-            <div
-              key={index}
-              className="flex items-center gap-6 rounded-lg p-6 flex-1 min-w-[200px]"
-              style={{ backgroundColor: item.bgColor }}
-            >
-              <i
-                className={`${item.icon} text-5xl`}
-                style={{ color: item.iconColor }}
-              />
-              <div>
-                <p className="font-extrabold text-lg leading-none">
-                  {item.count}
-                </p>
-                <p className="text-base leading-tight">{item.label}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+ <>
 
-        <GraphComponent />
+      
+
         <PaginatedBox
         
-  title="Most Selling Courses"
+  title="My Uploads"
   items={cardData}
   itemsPerPage={4}
   renderItem={(item, index) => <CourseCard key={index} {...item} />}
 />
 
-      </div>
-    </>
-  );
-};
+ </>
+  )
+}
 
-export default UserDashboard;
+export default MyUploads

@@ -3,8 +3,9 @@ import React from "react";
 const navItems = [
   { label: "Dashboard", icon: "fas fa-th-large" },
   { label: "My Subscriptions", icon: "far fa-credit-card" },
-  { label: "My Courses", icon: "fas fa-shopping-basket" },
-  { label: "Course Resume", icon: "far fa-file-alt" },
+  { label: "New Upload", icon: "fas fa-shopping-basket" },
+  { label: "My Uploads", icon: "fas fa-shopping-basket" },
+  { label: "My Like/Saved", icon: "far fa-file-alt" },
   { label: "Quiz", icon: "far fa-question-circle" },
   { label: "Wishlist", icon: "fas fa-shopping-cart" },
   { label: "Edit Profile", icon: "far fa-edit" },
@@ -18,7 +19,7 @@ const UserSidebar = ({setActiveComponent,closeSidebar,activeLabel }) => {
     alert("Add New function triggered!");
   };
 
-  console.log(activeLabel);
+
   
 
   const handleClick = (comp) => {
@@ -36,7 +37,7 @@ const UserSidebar = ({setActiveComponent,closeSidebar,activeLabel }) => {
         <span className="text-2xl cursor-pointer" onClick={() => {closeSidebar()}} >x</span>
     </div>
     <nav
-  className="min-h-lg md:min-h-fit  text-black w-64 b-10 md:mt-0 bg-[#1f2937] rounded-lg p-4 space-y-2 text-white font-sans select-none shadow-md"
+  className="min-h-lg md:min-h-fit  text-black w-64 b-10 md:mt-5 bg-[#1f2937] rounded-lg p-4 space-y-2 text-white font-sans select-none shadow-md"
   aria-label="Sidebar Navigation"
   onClick={(e) => e.stopPropagation()} // prevent overlay click from closing
 >

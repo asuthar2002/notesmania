@@ -5,14 +5,44 @@ import UserDashboard from './userSabPage/UserDashboard';
 import EditProfileForm from '../../components/comm/userProfile/editProfile/EditProfileForm';
 import ComingSoonPage from '../comingSoonPage/ComingSoonPage';
 import SettingsForm from '../../components/comm/userProfile/editProfile/SettingsForm';
+import DeactivateAccount from '../../components/comm/userProfile/editProfile/DeactivateAccount';
+import MyUploads from '../../components/comm/userProfile/MyUploads';
+import MySaved from './userSabPage/MySaved';
+import UserUpload from './userSabPage/UserUpload';
+import GeneralForm from '../../components/comm/subComm/GeneralForm';
 
 const UserPage = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
   const [activeComponent, setActiveComponent] = useState('Dashboard');
 
-  useEffect(() => {
-    console.log(activeComponent);
-  }, [activeComponent]); // Fix: add dependency
+
+  
+
+  const [data, setData] = useState({
+    name:'',
+    mobile:''
+
+  })
+
+console.log(data.name,data.mobile);
+
+
+  const fields = [
+  {    id: 'name',
+    label: 'Name',
+    type: 'text',
+    placeholder: 'Enter your name',
+    required: true
+  },
+  {    id: 'mobile',
+    label: 'mobile',
+    type: 'number',
+    placeholder: 'Enter your mob.',
+    required: true
+  },
+ 
+  ]
+
 
   const renderComponent = () => {
     switch (activeComponent) {
@@ -20,12 +50,18 @@ const UserPage = () => {
         return <UserDashboard />;
       case 'My Subscriptions':
         return <ComingSoonPage />;
-      case 'My Courses':
-        return <ComingSoonPage />;
-      case 'Course Resume':
-        return <ComingSoonPage />;
+      case 'New Upload':
+        return <UserUpload />;
+      case 'My Uploads':
+        return <MyUploads />;
+      case 'My Like/Saved':
+        return <MySaved />;
       case 'Quiz':
-        return <ComingSoonPage />;
+        return  <GeneralForm
+        data={data}
+        setData={setData}
+        fields={fields}
+      />;
       case 'Wishlist':
         return <ComingSoonPage />;
       case 'Quiz':
@@ -34,6 +70,8 @@ const UserPage = () => {
           return <SettingsForm/>;
       case 'Edit Profile':
           return <EditProfileForm/>;
+      case 'Delete Profile':
+          return <DeactivateAccount/>;
       return <UserDashboard />;
     }
   };
