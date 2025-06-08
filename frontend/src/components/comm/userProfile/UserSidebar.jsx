@@ -6,7 +6,6 @@ const navItems = [
   { label: "My Courses", icon: "fas fa-shopping-basket" },
   { label: "Course Resume", icon: "far fa-file-alt" },
   { label: "Quiz", icon: "far fa-question-circle" },
-  { label: "Payment Info", icon: "far fa-credit-card-blank" },
   { label: "Wishlist", icon: "fas fa-shopping-cart" },
   { label: "Edit Profile", icon: "far fa-edit" },
   { label: "Settings", icon: "fas fa-cog" },
