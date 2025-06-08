@@ -16,7 +16,6 @@ import ForgotPassword from './pages/auth/loginPage/ForgotPassword'
 import NotFoundPage from './pages/notFoundPage/NotFoundPage'
 
 
-
 function App() {
   return (
     <Router>

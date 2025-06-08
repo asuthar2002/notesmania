@@ -8,6 +8,7 @@ import LiveCoursesSlider from '../components/comm/liveCoursesSlider/LiveCoursesS
 import MissionFeatures from '../components/comm/missionFeatures/MissionFeatures'
 import PhotoGallery from '../components/comm/photoGallery/PhotoGallery'
 import Header from '../components/comm/header/header'
+import BlogSlider from '../components/comm/blog/BlogSlider'
 
 const HomePage = () => {
 
@@ -24,6 +25,7 @@ const HomePage = () => {
 <LiveCoursesSlider/>
 {/* <MissionFeatures/> */}
 <PhotoGallery/>
+<BlogSlider/>
 <PromoCard/>
 </div>
 </>
