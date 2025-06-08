@@ -125,6 +125,9 @@ const Header = () => {
           <div className="relative group">
             <Link to={'/user'}>users</Link>
           </div>
+          <div className="relative group">
+            <Link to={'/blog'}>Blog</Link>
+          </div>
           <button
             aria-label="More options"
             className="text-gray-600 text-2xl leading-none px-2 py-1 focus:outline-none"

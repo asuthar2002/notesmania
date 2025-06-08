@@ -14,6 +14,7 @@ import Courses from './pages/coursesPage.jsx/CoursesPage'
 import UserPage from './pages/userPage/UserPage'
 import ForgotPassword from './pages/auth/loginPage/ForgotPassword'
 import NotFoundPage from './pages/notFoundPage/NotFoundPage'
+import BlogPage from './pages/blogPage/BlogPage'
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
 
         <Route path="/login" element={<LoginPage />} />
         <Route path="/user" element={<UserPage/>} />
+        <Route path="/blog" element={<BlogPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
 

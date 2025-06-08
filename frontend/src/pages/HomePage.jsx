@@ -9,6 +9,7 @@ import MissionFeatures from '../components/comm/missionFeatures/MissionFeatures'
 import PhotoGallery from '../components/comm/photoGallery/PhotoGallery'
 import Header from '../components/comm/header/header'
 import BlogSlider from '../components/comm/blog/BlogSlider'
+import TestmonialSlider from '../components/comm/testmonials/TestmonialSlider'
 
 const HomePage = () => {
 
@@ -27,6 +28,7 @@ const HomePage = () => {
 <PhotoGallery/>
 <BlogSlider/>
 <PromoCard/>
+<TestmonialSlider/>
 </div>
 </>
   )
