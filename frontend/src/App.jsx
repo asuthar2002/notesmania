@@ -13,8 +13,13 @@ import LoginPage from './pages/auth/loginPage/LoginPage'
 import SignUpPage from './pages/auth/loginPage/signupPage/SignUpPage'
 import HomePage from './pages/HomePage'
 import Courses from './pages/coursesPage.jsx/CoursesPage'
+
+
 import ForgotPassword from './pages/auth/loginPage/ForgotPassword'
 import NotFoundPage from './pages/notFoundPage/NotFoundPage'
+
+import UserPage from './pages/userPage/UserPage'
+
 
 
 function App() {
@@ -33,6 +38,7 @@ function App() {
         // Auth Pages
 
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/user" element={<UserPage/>} />
         <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
 
