@@ -7,6 +7,7 @@ import PromoCard from '../components/comm/promoCard/PromoCard'
 import LiveCoursesSlider from '../components/comm/liveCoursesSlider/LiveCoursesSlider'
 import MissionFeatures from '../components/comm/missionFeatures/MissionFeatures'
 import PhotoGallery from '../components/comm/photoGallery/PhotoGallery'
+import Header from '../components/comm/header/header'
 
 const HomePage = () => {
 
@@ -15,6 +16,7 @@ const HomePage = () => {
   return (
 <>
 <div className='px-7'>
+  <Header/>
 <HeroPage/>
 <CategorySlider/>
 <CategoriesPage />

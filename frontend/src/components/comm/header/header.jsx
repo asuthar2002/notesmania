@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import MainBtn from "../mainBtn/MainBtn";
 import { Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const loginIcon = `<i class="fa-solid fa-right-to-bracket"></i>`;
@@ -24,7 +25,7 @@ const Header = () => {
           />
         </a>
         {/* Center: Navigation */}
-        <nav className=" hidden md:block md:flex items-center gap-6 text-base font-semibold">
+        <nav className=" hidden  md:flex items-center gap-6 text-base font-semibold">
           <div className="relative group">
             <button
               aria-expanded="false"
@@ -120,6 +121,9 @@ const Header = () => {
                 </a>
               </li>
             </ul>
+          </div>
+          <div className="relative group">
+            <Link to={'/user'}>users</Link>
           </div>
           <button
             aria-label="More options"
@@ -222,7 +226,7 @@ const Header = () => {
                   >
                     <i className="fas fa-moon"></i>
                     Dark
-                  </button>
+                  </button> 
                   <button
                     aria-pressed="false"
                     className="flex-1 flex items-center justify-center gap-2 rounded-lg border border-gray-300 py-2 text-gray-700 font-semibold shadow-sm focus:outline-none focus:ring-2 focus:ring-[#0047cc]"
