@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import pdfIcon from "../../../assets/pdf-icon.svg"; 
 
 const ThumbnailUploader = ({
   title = 'Thumbnail',
@@ -38,26 +39,39 @@ const ThumbnailUploader = ({
       <label className="block w-full cursor-pointer">
         <div className="w-full rounded-md border border-blue-400 border-dashed bg-blue-50 text-blue-600 text-center py-10 px-4 text-sm leading-relaxed select-none">
           {selectedFile ? (
-            <div>
-              {previewUrl && (
-                <img
-                  src={previewUrl}
-                  alt="preview"
-                  className="mx-auto h-24 object-contain mb-2"
-                />
-              )}
-              <p className="text-blue-700 font-medium">{selectedFile.name}</p>
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleClear();
-                }}
-                className="mt-2 text-red-500 text-sm underline"
-              >
-                Clear
-              </button>
-            </div>
+           <div>
+           {/* Check file type */}
+           {selectedFile.type === "application/pdf" ? (
+  <div className="text-center mb-2">
+    <img
+      src={pdfIcon} // This path works from public folder
+      alt="PDF File"
+      className="mx-auto h-24 object-contain"
+    />
+    <p className="text-sm text-gray-700 mt-2">(PDF File)</p>
+  </div>
+) : previewUrl ? (
+  <img
+    src={previewUrl}
+    alt="preview"
+    className="mx-auto h-24 object-contain mb-2"
+  />
+) : null}
+
+       
+           <p className="text-blue-700 font-medium">{selectedFile.name}</p>
+          
+           <button
+             type="button"
+             onClick={(e) => {
+               e.preventDefault();
+               handleClear();
+             }}
+             className="mt-2 text-red-500 text-sm underline"
+           >
+             Clear
+           </button>
+         </div>
           ) : (
             <>
               Drag 'n' drop or click to select a file
@@ -67,7 +81,7 @@ const ThumbnailUploader = ({
         <input
           ref={fileInputRef}
           type="file"
-          accept=".png,.jpg,.jpeg"
+          accept=".png,.jpg,.jpeg,.pdf"
           className="hidden"
           onChange={handleFileChange}
         />
