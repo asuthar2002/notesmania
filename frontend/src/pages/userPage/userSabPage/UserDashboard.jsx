@@ -95,6 +95,16 @@ const dashboardData = [
     },
   ];
 
+    
+const chartData = [
+  { name: "Jan", sales: 4000, users: 2400, views: 2400 },
+  { name: "Feb", sales: 3000, users: 1398, views: 2210 },
+  { name: "Mar", sales: 2000, users: 9800, views: 2290 },
+  { name: "Apr", sales: 2780, users: 3908, views: 2000 },
+  { name: "May", sales: 1890, users: 4800, views: 2181 },
+  { name: "Jun", sales: 2390, users: 3800, views: 2500 },
+  { name: "Jul", sales: 3490, users: 4300, views: 2100 },
+];
 
 const UserDashboard = () => {
   return (
