@@ -1,5 +1,6 @@
 import React from 'react'
 import UICard from '../../../components/ui/UICard'
+import UserCourses from './UserCourses'
 
 const ViewProfile = () => {
   return (
@@ -66,6 +67,7 @@ const ViewProfile = () => {
         </div>
       </div>
 </UICard>
+<UserCourses/>
       </>
   )
 }

@@ -10,6 +10,7 @@ import MyUploads from "../../components/comm/userProfile/MyUploads";
 import MySaved from "./userSabPage/MySaved";
 import UserUpload from "./userSabPage/UserUpload";
 import GeneralForm from "../../components/comm/subComm/GeneralForm";
+import EditUpload from "./userSabPage/EditUpload";
 
 const UserPage = () => {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
@@ -25,6 +26,8 @@ const UserPage = () => {
         return <ComingSoonPage />;
       case "New Upload":
         return <UserUpload />;
+      case "Edit Upload":
+        return <EditUpload />;
       case "My Uploads":
         return <MyUploads />;
       case "My Like/Saved":

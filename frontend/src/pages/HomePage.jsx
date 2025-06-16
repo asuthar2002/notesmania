@@ -10,6 +10,7 @@ import PhotoGallery from '../components/comm/photoGallery/PhotoGallery'
 import Header from '../components/comm/header/header'
 import BlogSlider from '../components/comm/blog/BlogSlider'
 import TestmonialSlider from '../components/comm/testmonials/TestmonialSlider'
+import Footer from '../components/comm/footer/Footer'
 
 const HomePage = () => {
 
@@ -29,6 +30,7 @@ const HomePage = () => {
 <BlogSlider/>
 <PromoCard/>
 <TestmonialSlider/>
+<Footer/>
 </div>
 </>
   )

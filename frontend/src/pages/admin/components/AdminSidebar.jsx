@@ -13,6 +13,8 @@ import {
   FaCog,
   FaGlobe,
   FaPowerOff,
+  FaFile,
+  FaFileArchive,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
@@ -75,6 +77,9 @@ const AdminSidebar = () => {
           </Link>
 
           <p className="text-gray-500 text-sm mt-6 select-none">Pages</p>
+          <Link to="/admin/file-manager">
+          <SidebarLink icon={<FaFileArchive className="text-lg" />} label="File Manager" />
+          </Link>
 
           <SidebarDropdown
             icon={<FaShoppingBasket className="text-lg" />}

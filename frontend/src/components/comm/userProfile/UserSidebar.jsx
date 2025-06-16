@@ -3,6 +3,7 @@ import React from "react";
 const navItems = [
   { label: "Dashboard", icon: "fas fa-th-large" },
   { label: "My Subscriptions", icon: "far fa-credit-card" },
+  { label: "File Manager", icon: "fas fa-folder" },
   { label: "New Upload", icon: "fas fa-shopping-basket" },
   { label: "My Uploads", icon: "fas fa-shopping-basket" },
   { label: "My Like/Saved", icon: "far fa-file-alt" },
@@ -11,6 +12,7 @@ const navItems = [
   { label: "Edit Profile", icon: "far fa-edit" },
   { label: "Settings", icon: "fas fa-cog" },
   { label: "Delete Profile", icon: "far fa-trash-alt" },
+  { label: "Edit Upload", icon: "far fa-trash-alt" },
 ];
 
 const UserSidebar = ({setActiveComponent,closeSidebar,activeLabel }) => {

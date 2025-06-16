@@ -12,6 +12,7 @@ import GeneralSettings from "./page/subPage/adminSetting/GeneralSettings";
 import NotificationsSettings from "./page/subPage/adminSetting/NotificationsSettings";
 import AccountSettings from "./page/subPage/adminSetting/AccountSettings";
 import EmailSettings from "./page/subPage/adminSetting/EmailSettings";
+import FileManager from "./page/subPage/fileManager/FileManager";
 
 function AdminLayout() {
   const location = useLocation();
@@ -25,6 +26,9 @@ function AdminLayout() {
         break;
       case "/admin/students":
         setActiveTab("students");
+        break;
+      case "/admin/file-manager":
+        setActiveTab("file-manager");
         break;
       case "/admin/student-profile":
         setActiveTab("student-profile");
@@ -78,6 +82,8 @@ function AdminLayout() {
         return loading ? <UILoading /> : <AccountSettings />;
       case "email-settings":
         return loading ? <UILoading /> : <EmailSettings />;
+      case "file-manager":
+        return loading ? <UILoading /> : <FileManager />;
 
         return <div>Not Found</div>;
     }
