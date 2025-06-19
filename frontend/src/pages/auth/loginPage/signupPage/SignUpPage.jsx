@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const SignUpPage = () => {
   const [email, setEmail] = useState("");
@@ -8,7 +8,6 @@ const SignUpPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Login with:", { email, password, rememberMe });
-    // Add form submission logic here (e.g., API call)
   };
 
   return (
