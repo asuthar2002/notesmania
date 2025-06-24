@@ -1,7 +1,5 @@
-import mongoose, { Schema, Document, Model } from "mongoose";
-import type { IUser } from "../interfaces/interfaces";
-
-export interface IUserModel extends IUser, Document { }
+import mongoose, { Schema, Model } from "mongoose";
+import { IUserModel } from "../interfaces/interfaces";
 
 const userSchema = new Schema<IUserModel>({
     firstName: { type: String, required: true },
@@ -10,7 +8,12 @@ const userSchema = new Schema<IUserModel>({
     department: { type: String, required: true },
     year: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true }
+    password: { type: String, required: true },
+    refreshToken: { type: String, default: null },
+    isVerified: { type: Boolean, default: false },
+    isAdmin: { type: Boolean, default: false },
+}, {
+    timestamps: true,
 });
 
 const User: Model<IUserModel> = mongoose.model<IUserModel>("User", userSchema);

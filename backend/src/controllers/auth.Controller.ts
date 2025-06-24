@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { registerNewUser } from "../services/auth.service";
 import { sendError, sendSuccess } from "../utils/response";
 
-export const registerUser = async (req: Request, res: Response) => {
+export const registerUser = async (req: Request, res: Response): Promise<any> => {
     try {
         if (req.body.password !== req.body.confirmPassword) {
             return sendError(res, 400, "Passwords do not match");
@@ -13,7 +13,7 @@ export const registerUser = async (req: Request, res: Response) => {
             return sendError(res, 400, result.message);
         }
 
-        return sendSuccess(res, 201, result.data, result.message);
+        return sendSuccess(res, 201, result.message, result.data);
     } catch (error) {
         console.error("Register Error:", error);
         return sendError(res, 500, "Internal server error", error);

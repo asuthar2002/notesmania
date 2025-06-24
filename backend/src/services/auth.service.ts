@@ -1,11 +1,14 @@
 import bcrypt from "bcrypt";
 import User from "../models/user.Model";
-import { IUser } from "../interfaces/interfaces";
-import { ApiErrorResponse, ApiSuccessResponse } from "../interfaces/interfaces";
-export const registerNewUser = async (userData: IUser): Promise<ApiSuccessResponse<{ email: string }> | ApiErrorResponse> => {
+import { ApiErrorResponse, ApiSuccessResponse, IUserRegisterInput } from "../interfaces/interfaces";
+import { generateAccessToken, generateRefreshToken } from "../utils/jwt";
+export const registerNewUser = async (userData: IUserRegisterInput): Promise<ApiSuccessResponse<{
+    user: { id: string; email: string; };
+    token: { accessToken: string; refreshToken: string }
+}> | ApiErrorResponse> => {
     const { firstName, lastName, university, department, year, email, password, confirmPassword } = userData;
     try {
-        if (!email || !password || !firstName || !lastName || !university || !department || !year || !confirmPassword) {
+        if (!email || !password || !firstName || !lastName || !confirmPassword) {
             return {
                 success: false,
                 message: "Please provide all required fields and ensure passwords match"
@@ -17,29 +20,31 @@ export const registerNewUser = async (userData: IUser): Promise<ApiSuccessRespon
                 message: "Passwords do not match"
             };
         }
-        const data = await User.findOne({ email })
-        if (data) {
+        const existingUser = await User.findOne({ email })
+        if (existingUser) {
             return {
                 success: false,
                 message: "User already exists with this email"
             };
         }
         const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = new User({
-            firstName,
-            lastName,
-            university,
-            department,
-            year,
-            email,
-            password: hashedPassword
-        })
+        const newUser = new User({ firstName, lastName, university, department, year, email, password: hashedPassword });
+        const accessToken = generateAccessToken(newUser._id.toString());
+        const refreshToken = generateRefreshToken(newUser._id.toString());
+        newUser.refreshToken = refreshToken;
         await newUser.save();
         return {
             success: true,
             message: "User registered successfully",
             data: {
-                email: newUser.email
+                user: {
+                    id: newUser._id.toString(),
+                    email: newUser.email,
+                },
+                token: {
+                    accessToken,
+                    refreshToken
+                }
             }
         };
     } catch (error) {
