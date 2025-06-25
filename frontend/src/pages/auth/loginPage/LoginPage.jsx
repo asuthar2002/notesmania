@@ -1,16 +1,91 @@
-import React, { useState } from "react";
-
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import axios from "axios";
 const LoginPage = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(false);
+  const navigate = useNavigate();
+  const [loginForm, setLoginForm] = useState({ email: "", password: "" })
+  const [errors, setErrors] = useState({ email: "", password: "" });
+  useEffect(() => {
+    const checkToken = async () => {
+      const token = localStorage.getItem("accessToken");
+      if (!token) return;
 
-  const handleSubmit = (e) => {
+      try {
+        // You can change `/api/verify-token` to any lightweight endpoint like /api/me
+        const res = await axios.get("/api/auth/verify-token", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (res.status === 200) {
+          navigate("/");
+        }
+      } catch (err) {
+        console.log("Invalid or expired token");
+        // Optionally: remove token if invalid
+        localStorage.removeItem("accessToken");
+      }
+    };
+
+    checkToken();
+  }, [navigate]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setLoginForm({
+      ...loginForm,
+      [name]: value
+    })
+    if (name === "email") {
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+        setErrors((prev) => ({ ...prev, email: "Invalid email format" }));
+      } else {
+        setErrors((prev) => ({ ...prev, email: "" }));
+      }
+    }
+
+    if (name === "password") {
+      if (value.length < 8) {
+        setErrors((prev) => ({ ...prev, password: "Password must be at least 8 characters" }));
+      } else {
+        setErrors((prev) => ({ ...prev, password: "" }));
+      }
+    }
+  }
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Login with:", { email, password, rememberMe });
-    // Add form submission logic here (e.g., API call)
-  };
+    if (!loginForm.email || !loginForm.password) {
+      toast.error("All fields are required");
+      return;
+    }
+    if (errors.email || errors.password) {
+      toast.error("Please fix the form errors before submitting");
+      return;
+    }
+    try {
+      const loginResponse = await axios.post("http://localhost:5000/api/auth/login", loginForm, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      toast.success("Login successful!");
+      const { accessToken, user } = loginResponse.data.data;
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("user", JSON.stringify(user));
+      // navigate to the home page or dashboard
+      navigate("/");
 
+    }
+    catch (err) {
+      console.error(err);
+      const errorMsg = err.response?.data?.message || "Login failed";
+      toast.error(errorMsg);
+    }
+  }
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
       {/* Left Section */}
@@ -66,14 +141,16 @@ const LoginPage = () => {
                   <i className="fas fa-envelope"></i>
                 </span>
                 <input
+                  name="email"
                   type="email"
                   id="email"
                   required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={loginForm.email}
+                  onChange={handleChange}
                   placeholder="user@email.com"
                   className="w-full pl-10 pr-4 py-3 rounded-md bg-[#F1F5F9] text-[#475569] placeholder-[#94A3B8] focus:outline-none focus:ring-2 focus:ring-blue-600"
                 />
+                {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
               </div>
             </div>
 
@@ -86,40 +163,24 @@ const LoginPage = () => {
                   <i className="fas fa-lock"></i>
                 </span>
                 <input
+                  name="password"
                   type="password"
                   id="password"
                   required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={loginForm.password}
+                  onChange={handleChange}
                   placeholder="********"
                   className="w-full pl-10 pr-4 py-3 rounded-md bg-[#F1F5F9] text-[#475569] placeholder-[#94A3B8] focus:outline-none focus:ring-2 focus:ring-blue-600"
                 />
+                {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
               </div>
-              <p className="text-xs text-[#94A3B8] mt-1">
-                Your password must be 8 characters at least
-              </p>
             </div>
-
-            <div className="flex items-center justify-between text-[#475569] text-sm">
-              <label className="flex items-center space-x-2">
-                <input
-                  type="checkbox"
-                  checked={rememberMe}
-                  onChange={(e) => setRememberMe(e.target.checked)}
-                  className="w-4 h-4 rounded border-gray-300"
-                />
-                <span>Remember me</span>
-              </label>
-              <a href="#" className="underline hover:text-blue-600">
-                Forgot password?
-              </a>
-            </div>
-
             <button
               type="submit"
+              disabled={!!errors.email || !!errors.password || !loginForm.email || !loginForm.password}
               className="w-full bg-blue-600 text-white font-semibold py-3 rounded-md hover:bg-blue-700 transition"
             >
-              Login
+              Login page
             </button>
           </form>
 

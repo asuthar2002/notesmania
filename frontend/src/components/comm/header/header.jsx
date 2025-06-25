@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import MainBtn from "../mainBtn/MainBtn";
 import { Menu, X } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate()
   const loginIcon = `<i class="fa-solid fa-right-to-bracket"></i>`;
 
   const [isOpen, setIsOpen] = useState(false);
@@ -239,13 +240,12 @@ const Header = () => {
             </div>
           ) : (
             <>
-              {/* With icon, custom color */}
               <MainBtn
                 text="Login"
                 icon={loginIcon}
                 bgColor="#1e40af"
                 textColor="#fff"
-                onClick={() => alert("Login clicked")}
+                onClick={() => navigate("/login")}
               />
             </>
           )}
@@ -327,14 +327,14 @@ const Header = () => {
                 icon={loginIcon}
                 bgColor="#1e40af"
                 textColor="#fff"
-                onClick={() => alert("Login clicked")}
+                onClick={() => alert("Login 2")}
               />
             <MainBtn
                 text="Sign Up"
                 icon={loginIcon}
                 bgColor="#1e40af"
                 textColor="#fff"
-                onClick={() => alert("Login clicked")}
+                onClick={() => alert("Login 3")}
               />
             </div>
           </div>

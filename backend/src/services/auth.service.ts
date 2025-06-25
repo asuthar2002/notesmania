@@ -2,8 +2,7 @@ import bcrypt from "bcrypt";
 import User from "../models/user.Model";
 import { ApiErrorResponse, ApiSuccessResponse, IUserRegisterInput } from "../interfaces/interfaces";
 import { generateAccessToken, generateRefreshToken } from "../utils/jwt";
-import { sendSuccess } from "../utils/response";
-export const registerUserController = async (userData: IUserRegisterInput): Promise<ApiSuccessResponse<{
+export const registerUserService = async (userData: IUserRegisterInput): Promise<ApiSuccessResponse<{
     user: { id: string; email: string; };
     token: { accessToken: string; refreshToken: string }
 }> | ApiErrorResponse> => {
@@ -63,27 +62,27 @@ export const registerUserController = async (userData: IUserRegisterInput): Prom
         };
     }
 }
-export const loginUserController = async (userData: any): Promise<ApiSuccessResponse<any> | ApiErrorResponse> => {
+export const loginUserService = async (userData: any): Promise<ApiSuccessResponse<any> | ApiErrorResponse> => {
     try {
         const { email, password } = userData;
         if (!email || !password) {
             return {
                 success: false,
-                message: "Please provide all fields"
+                message: "Invalid credentials"
             };
         }
         const user = await User.findOne({ email });
         if (!user) {
             return {
                 success: false,
-                message: "User not found with this email"
+                message: "Invalid credentials"
             };
         }
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             return {
                 success: false,
-                message: "Invalid password"
+                message: "Invalid credentials"
             };
         }
         const accessToken = generateAccessToken(user._id.toString());
@@ -112,5 +111,39 @@ export const loginUserController = async (userData: any): Promise<ApiSuccessResp
             error: String(error)
         };
     }
-
+}
+export const varifyTokenService = async (token: string): Promise<ApiSuccessResponse<{ valid: boolean }> | ApiErrorResponse> => {
+    try {
+        if (!token) {
+            return {
+                success: false,
+                message: "No token provided"
+            };
+        }
+        const user = await User.findOne({ refreshToken: token });
+        if (!user) {
+            return {
+                success: false,
+                message: "Invalid token"
+            };
+        }
+        return {
+            success: true,
+            message: "Token is valid",
+            data: { valid: true }
+        };
+    } catch (error) {
+        if (error instanceof Error) {
+            return {
+                success: false,
+                message: "An error occurred while logging in",
+                error: error.message
+            };
+        }
+        return {
+            success: false,
+            message: "An unknown error occurred",
+            error: String(error)
+        };
+    }
 }
