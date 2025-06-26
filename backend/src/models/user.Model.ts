@@ -4,9 +4,9 @@ import { IUserModel } from "../interfaces/interfaces";
 const userSchema = new Schema<IUserModel>({
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
-    university: { type: String, required: true },
-    department: { type: String, required: true },
-    year: { type: String, required: true },
+    university: { type: String },
+    department: { type: String },
+    year: { type: String },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     refreshToken: { type: String, default: null },

@@ -14,7 +14,7 @@ export interface IUser {
 }
 
 export interface IUserRegisterInput extends IUser {
-    confirmPassword: string;
+    confirmPassword?: string;
 }
 
 export interface IUserModel extends IUser, Document {

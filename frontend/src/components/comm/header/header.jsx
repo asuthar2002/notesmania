@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
   const navigate = useNavigate()
-  const loginIcon = `<i class="fa-solid fa-right-to-bracket"></i>`;
+  const loginIcon = `<i className="fa-solid fa-right-to-bracket"></i>`;
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -153,7 +153,7 @@ const Header = () => {
                 className="absolute right-5 inset-y-0 flex items-center  text-gray-400 hover:text-gray-600 focus:outline-none"
                 type="submit"
               >
-                <i class="fa-solid fa-magnifying-glass"></i>
+                <i className="fa-solid fa-magnifying-glass"></i>
               </button>
             </form>
           </div>
@@ -227,7 +227,7 @@ const Header = () => {
                   >
                     <i className="fas fa-moon"></i>
                     Dark
-                  </button> 
+                  </button>
                   <button
                     aria-pressed="false"
                     className="flex-1 flex items-center justify-center gap-2 rounded-lg border border-gray-300 py-2 text-gray-700 font-semibold shadow-sm focus:outline-none focus:ring-2 focus:ring-[#0047cc]"
@@ -265,7 +265,7 @@ const Header = () => {
 
       {isOpen && (
         <>
-             <div className="fixed inset-0 top-16 bg-white z-50 px-5 py-4 space-y-2 md:hidden">
+          <div className="fixed inset-0 top-16 bg-white z-50 px-5 py-4 space-y-2 md:hidden">
             <a
               href="/#features"
               className="block text-gray-700 hover:text-[#fd4a18] text-2xl font-medium"
@@ -316,20 +316,20 @@ const Header = () => {
                     className="absolute right-5 inset-y-0 flex items-center  text-gray-400 hover:text-gray-600 focus:outline-none"
                     type="submit"
                   >
-                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <i className="fa-solid fa-magnifying-glass"></i>
                   </button>
                 </form>
               </div>
             </div>
             <div className="pt-4 flex gap-5 border-t border-gray-200">
-            <MainBtn
+              <MainBtn
                 text="Login"
                 icon={loginIcon}
                 bgColor="#1e40af"
                 textColor="#fff"
                 onClick={() => alert("Login 2")}
               />
-            <MainBtn
+              <MainBtn
                 text="Sign Up"
                 icon={loginIcon}
                 bgColor="#1e40af"
