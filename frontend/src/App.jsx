@@ -3,6 +3,8 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import 'font-awesome/css/font-awesome.min.css'
 import './App.css'
+import { verifyToken } from './features/auth/authSlice';
+import { useDispatch } from 'react-redux';
 // Pages & Components
 import SingleVideoSection from './pages/heroPage/singleVideoSection/SingleVideoSection'
 import SearchHeader from './pages/searchHeader/SearchHeader'
@@ -17,11 +19,16 @@ import Courses from './pages/coursesPage.jsx/CoursesPage'
 import ForgotPassword from './pages/auth/loginPage/ForgotPassword'
 import NotFoundPage from './pages/notFoundPage/NotFoundPage'
 import UserPage from './pages/userPage/UserPage'
+import { useEffect } from 'react';
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(verifyToken())
+  }, [dispatch])
   return (
     <Router>
-       <ToastContainer position="top-right" autoClose={3000} />
+      <ToastContainer position="top-right" autoClose={3000} />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/video" element={<SingleVideoSection />} />
@@ -30,10 +37,10 @@ function App() {
         <Route path="/courses" element={<Courses />} />
         <Route path="/stats" element={<ProudStatsSection />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/user" element={<UserPage/>} />
+        <Route path="/user" element={<UserPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path='*' element={<NotFoundPage/>}/>
+        <Route path='*' element={<NotFoundPage />} />
       </Routes>
     </Router>
   )

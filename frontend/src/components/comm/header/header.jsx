@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import MainBtn from "../mainBtn/MainBtn";
 import { Menu, X } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-
+import { useSelector } from "react-redux";
 const Header = () => {
   const navigate = useNavigate()
   const loginIcon = `<i className="fa-solid fa-right-to-bracket"></i>`;
+  const { user, isAuthenticated } = useSelector((state) => state.auth);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -22,7 +23,7 @@ const Header = () => {
             width={100}
             src="https://notesmania.in/static/media/logo-black.8bcd68e31e1a3b445c10.png"
             alt=""
-            srcset=""
+            srcSet=""
           />
         </a>
         {/* Center: Navigation */}
@@ -139,7 +140,7 @@ const Header = () => {
             <form
               aria-label="Site search"
               className="relative"
-              onsubmit="event.preventDefault()"
+              onSubmit={() => { }}
               role="search"
             >
               <input
@@ -240,13 +241,16 @@ const Header = () => {
             </div>
           ) : (
             <>
-              <MainBtn
-                text="Login"
-                icon={loginIcon}
-                bgColor="#1e40af"
-                textColor="#fff"
-                onClick={() => navigate("/login")}
-              />
+              {isAuthenticated ? (
+                <div className="flex gap-4 items-center">
+                  <span>👋 Hi, {user?.firstName || user?.email}</span>
+                  <button onClick={() => dispatch(logout())}>Logout</button>
+                </div>
+              ) : (
+                <div>
+                  <Link to="/login">Login</Link>
+                </div>
+              )}
             </>
           )}
 
@@ -302,7 +306,7 @@ const Header = () => {
                 <form
                   aria-label="Site search"
                   className="relative"
-                  onsubmit="event.preventDefault()"
+                  onSubmit={(event) => event.preventDefault()}
                   role="search"
                 >
                   <input
