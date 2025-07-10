@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import axios from "axios";
+import { useAppDispatch, useAppSelector } from '../../../hooks/useAppDispatch';
+import { verifyToken } from "../../../features/auth/authSlice";
+import { loginUser, signupUser } from '../../../features/auth/authSlice';
 const FormField = ({ label, name, type = "text", value, onChange, iconClass, error, required = false, placeholder = "" }) => (
   <div className="mb-4">
     <label htmlFor={name} className="block text-sm text-[#475569] mb-1">
@@ -16,6 +18,8 @@ const FormField = ({ label, name, type = "text", value, onChange, iconClass, err
   </div>
 );
 const LoginPage = () => {
+  const dispatch = useAppDispatch();
+  const { loading, error, isAuthenticated } = useAppSelector((state) => state.auth);
   const navigate = useNavigate();
   const [loginForm, setLoginForm] = useState({ email: "", password: "", firstName: "", lastName: "", confirmPassword: "" });
   const [errors, setErrors] = useState({ email: "", password: "" });
@@ -29,22 +33,12 @@ const LoginPage = () => {
   ];
 
   useEffect(() => {
-    const checkToken = async () => {
-      const token = localStorage.getItem("accessToken");
-      if (!token) return;
-      try {
-        const res = await axios.get("/api/auth/verify-token", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        if (res.status === 200) navigate("/")
-      } catch (err) {
-        console.log("Invalid or expired token");
-        localStorage.removeItem("accessToken");
+    dispatch(verifyToken()).then((res) => {
+      if (res.meta.requestStatus === "fulfilled") {
+        navigate("/");
       }
-    };
-
-    checkToken();
-  }, [navigate]);
+    });
+  }, [dispatch, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -98,26 +92,23 @@ const LoginPage = () => {
       delete payload.firstName;
       delete payload.lastName;
     }
-    console.log("Submitting form:", payload);
     try {
-      const url = authState === "signup" ? "http://localhost:5000/api/auth/register" : "http://localhost:5000/api/auth/login";
-      const loginResponse = await axios.post(url, loginForm, {
-        withCredentials: true,
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
-      console.log("Login response:", loginResponse);
-      toast.success(`${authState === "login" ? "Login" : "Signup"} successful!`);
-      const { accessToken, user } = loginResponse.data.data;
-      localStorage.setItem("accessToken", accessToken);
-      localStorage.setItem("user", JSON.stringify(user));
-      navigate("/");
-    }
-    catch (err) {
-      console.error(err);
-      const errorMsg = err.response?.data?.message || `${authState} failed`;
-      toast.error(errorMsg);
+      let result;
+      if (authState === "login") {
+        result = await dispatch(loginUser(payload));
+      } else {
+        result = await dispatch(signupUser(payload));
+      }
+
+      if (result.meta.requestStatus === "fulfilled") {
+        toast.success(`${authState === "login" ? "Login" : "Signup"} successful!`);
+        navigate("/");
+      } else {
+        toast.error(result.payload || "Authentication failed");
+      }
+    } catch (err) {
+      console.error("Unexpected error:", err);
+      toast.error("Something went wrong");
     }
   }
   return (
@@ -153,9 +144,14 @@ const LoginPage = () => {
                 <FormField key={field.name} {...field} value={loginForm[field.name] || ""} onChange={handleChange} error={errors[field.name]} placeholder={field.label} />
               );
             })}
-            <button type="submit" disabled={!!errors.email || !!errors.password} className="w-full bg-blue-600 text-white font-semibold py-3 rounded-md hover:bg-blue-700 transition" >
-              {authState === "login" ? "Login" : "SignUp"}
+            <button
+              type="submit"
+              disabled={loading || !!errors.email || !!errors.password}
+              className="w-full bg-blue-600 text-white font-semibold py-3 rounded-md hover:bg-blue-700 transition"
+            >
+              {loading ? "Processing..." : authState === "login" ? "Login" : "Sign Up"}
             </button>
+
           </form>
           <div className="flex items-center my-8 text-[#94A3B8] text-sm">
             <div className="flex-grow border-t border-gray-300"></div>
