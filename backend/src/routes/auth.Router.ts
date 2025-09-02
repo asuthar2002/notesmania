@@ -3,7 +3,7 @@ import { loginRateLimiter, registerRateLimiter } from "../middlewares/rateLimit.
 import { Router } from "express";
 const router = Router();
 
-router.post("/register", registerRateLimiter, registerUserController);
+router.post("/register", registerUserController);
 router.post("/login", loginUserController);
 router.get("/verify-token", varifyTokenController);
 export default router;

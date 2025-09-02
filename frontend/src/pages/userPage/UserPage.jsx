@@ -29,8 +29,6 @@ const UserPage = () => {
         return <MyUploads />;
       case "My Like/Saved":
         return <MySaved />;
-      case "Quiz":
-        return <ComingSoonPage />;
       case "Wishlist":
         return <ComingSoonPage />;
       case "Quiz":

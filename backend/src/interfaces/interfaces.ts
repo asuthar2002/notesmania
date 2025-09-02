@@ -3,12 +3,19 @@ import { Types, Document } from "mongoose";
 export interface IUser {
     firstName: string;
     lastName: string;
-    university?: string;
-    department?: string;
-    year?: string;
     email: string;
     password: string;
-    refreshToken?: string;
+    refreshToken: string;
+    phone?: string;
+    location?: string;
+    about?: string;
+    universityName?: string;
+    universityCourse?: string;
+    universityCgpa?: string;
+    year?: string;
+    schoolName?: string;
+    schoolCourse?: string;
+    schoolPercentage?: string;
     isVerified?: boolean;
     isAdmin?: boolean;
 }

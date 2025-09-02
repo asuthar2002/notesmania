@@ -3,8 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { useAppDispatch, useAppSelector } from '../../../hooks/useAppDispatch';
-import { verifyToken } from "../../../features/auth/authSlice";
-import { loginUser, signupUser } from '../../../features/auth/authSlice';
+import { loginUser, signupUser, verifyToken } from '../../../features/auth/authThunks';
 const FormField = ({ label, name, type = "text", value, onChange, iconClass, error, required = false, placeholder = "" }) => (
   <div className="mb-4">
     <label htmlFor={name} className="block text-sm text-[#475569] mb-1">
@@ -23,7 +22,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const [loginForm, setLoginForm] = useState({ email: "", password: "", firstName: "", lastName: "", confirmPassword: "" });
   const [errors, setErrors] = useState({ email: "", password: "" });
-  const [authState, setAuthState] = useState("login");
+  const [authState, setAuthState] = useState("signup");
   const fields = [
     { name: "firstName", label: "First Name", type: "text", required: true, showIn: ["signup"] },
     { name: "lastName", label: "Last Name", type: "text", required: true, showIn: ["signup"] },

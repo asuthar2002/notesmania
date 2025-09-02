@@ -1,10 +1,8 @@
 import React from "react";
-import Header from "../header/header";
 
 function UserHeader({ toggleSidebar, isSidebarOpen }) {
   return (
     <>
-    <Header/>
       <div className="bg-amber-400 w-full h-25  md:h-30"></div>
 
       <div className="max-w-[90%] md:max-w-6xl mx-auto -mt-10 bg-white  border-2 border-slate-200 rounded-2xl ">
@@ -27,19 +25,11 @@ function UserHeader({ toggleSidebar, isSidebarOpen }) {
                 Lori Stevens
               </span>
               <div className="flex flex-wrap gap-x-2 text-[11px] text-gray-500 font-medium">
-                <span>
-                  <span className="font-bold text-black">255</span> points
-                </span>
+                <span>  <span className="font-bold text-black">255</span> points</span>
                 <span>·</span>
-                <span>
-                  <span className="font-bold text-black">7</span> Completed
-                  courses
-                </span>
+                <span>   <span className="font-bold text-black">7</span> Completed   courses </span>
                 <span>·</span>
-                <span>
-                  <span className="font-bold text-black">52</span> Completed
-                  lessons
-                </span>
+                <span>  <span className="font-bold text-black">52</span> Completed  lessons</span>
               </div>
             </div>
           </div>
@@ -51,31 +41,31 @@ function UserHeader({ toggleSidebar, isSidebarOpen }) {
             </button>
           </div>
         </div>
-        
+
       </div>
       <header className=" text-black p-4 md:hidden  flex justify-between items-center">
-          <h1 className="text-lg font-bold">Menu</h1>
+        <h1 className="text-lg font-bold">Menu</h1>
 
-          {/* Mobile Hamburger */}
-          <button
-            onClick={toggleSidebar}
-            className="md:hidden text-balck focus:outline-none"
+        {/* Mobile Hamburger */}
+        <button
+          onClick={toggleSidebar}
+          className="md:hidden text-balck focus:outline-none"
+        >
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
           >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          </button>
-        </header>
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+      </header>
 
     </>
   );

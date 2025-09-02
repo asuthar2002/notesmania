@@ -2,7 +2,7 @@ import React from 'react'
 
 const SingleVideoSection = () => {
   return (
-<>
+  <>
 <div className="relative overflow-hidden max-w-full flex flex-col-reverse lg:flex-row items-center justify-between px-6 sm:px-12 md:px-20 lg:px-32 h-auto lg:h-[400px] gap-6 py-12 lg:py-0">
 
   {/* Orange circle top left */}
@@ -21,6 +21,7 @@ const SingleVideoSection = () => {
     style={{ top: 180, left: 0, width: 600, height: 140 }}
     viewBox="0 0 600 140"
     xmlns="http://www.w3.org/2000/svg"
+    
   >
     <path d="M0 140C100 40 200 40 300 60C400 80 500 140 600 140" fill="none" stroke="#f4bf2e" strokeWidth="4" />
   </svg>
